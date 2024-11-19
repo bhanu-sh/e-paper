@@ -10,29 +10,44 @@ connect();
 export async function POST(request) {
   const data = await request.formData();
   const file = data.get("file");
+  const newsDate = data.get("date"); // Get the date from the form
 
   if (!file) {
     return NextResponse.json({ success: false, message: "No file provided" });
   }
 
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-
-  // Sanitize the file name to remove spaces and special characters
-  const sanitizedFileName = file.name.replace(/[^\w.-]/g, "_"); // Replace spaces/special characters with underscores
-
-  const directory = join(process.cwd(), "public", "uploads"); // Path to public/uploads
-  const path = join(directory, sanitizedFileName); // Use sanitized file name
+  if (!newsDate) {
+    return NextResponse.json({ success: false, message: "No date provided" });
+  }
 
   try {
+    // Validate and format the date
+    const dateObj = new Date(newsDate);
+    if (isNaN(dateObj)) {
+      return NextResponse.json({
+        success: false,
+        message: "Invalid date format",
+      });
+    }
+    const formattedDate = dateObj.toISOString().split("T")[0].replace(/-/g, ""); // Format: YYYYMMDD
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Create the file name as YYYYMMDD
+    const fileName = `${formattedDate}${file.name.slice(file.name.lastIndexOf("."))}`; // Append original extension
+    const directory = join(process.cwd(), "public", "uploads");
+    const path = join(directory, fileName);
+
     await mkdir(directory, { recursive: true }); // Ensure the directory exists
     await writeFile(path, buffer); // Write the file
     console.log("File uploaded to", path);
 
-    // Save the file path to the database
+    // Save the file and date to the database
     const paper = new Paper({
-      title: sanitizedFileName,
-      url: `/uploads/${sanitizedFileName}`,
+      title: fileName,
+      url: `/uploads/${fileName}`,
+      newsDate: dateObj, // Save the date in the database
     });
     await paper.save();
 

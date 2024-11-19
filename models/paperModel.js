@@ -11,6 +11,10 @@ const paperSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    newsDate: {
+      type: Date,
+      required: true,
+    },
   },
   {
     timestamps: true,
