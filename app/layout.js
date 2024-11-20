@@ -4,20 +4,21 @@ import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "Avatar Kranti E-Paper",
-  description: "Avatar Kranti E-Paper",
+  description: "Stay updated with Avatar Kranti E-Paper, your go-to source for the latest news.",
   openGraph: {
     type: "website",
-    url: "https://avatar-kranti.vercel.app/",
+    url: "https://avatarkranti.vercel.app/",
     title: "Avatar Kranti E-Paper",
-    description: "Avatar Kranti E-Paper",
+    description: "Stay updated with Avatar Kranti E-Paper, your go-to source for the latest news.",
     images: [{ url: "/assets/logo.png" }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Next.js",
-    description: "The React Framework for the Web",
-    creator: "Bhanu",
-    images: ["/assets/thumbnail.png"],
+    card: "summary_large_image", // Ensures a large preview card on Twitter
+    site: "@YourTwitterHandle", // Replace with your site's Twitter username
+    creator: "@Bhanu", // Replace with your personal Twitter username
+    title: "Avatar Kranti E-Paper",
+    description: "Stay updated with Avatar Kranti E-Paper, your go-to source for the latest news.",
+    images: [{ url: "https://avatarkranti.vercel.app/assets/thumbnail.png" }],
   },
 };
 
