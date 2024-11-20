@@ -10,7 +10,7 @@ export const metadata = {
     url: "https://avatarkranti.vercel.app/",
     title: "Avatar Kranti E-Paper",
     description: "Stay updated with Avatar Kranti E-Paper, your go-to source for the latest news.",
-    images: [{ url: "/assets/logo.png" }],
+    images: [{ url: "https://avatarkranti.vercel.app/assets/logo.png" }],
   },
   twitter: {
     card: "summary_large_image", // Ensures a large preview card on Twitter
