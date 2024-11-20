@@ -17,9 +17,11 @@ export default function Navbar() {
         <Link href="/">
           <p className="mb-2">Home</p>
         </Link>
-        <Link href="/upload">
-          <p className="mb-2">Upload</p>
-        </Link>
+        <SignedIn>
+          <Link href="/upload">
+            <p className="mb-2">Upload</p>
+          </Link>
+        </SignedIn>
       </div>
       <div>
         <SignedOut>
